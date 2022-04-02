@@ -21,14 +21,6 @@ const noteSchema = new mongoose.Schema({
   important: Boolean,
 })
 
-noteSchema.set('toJSON', {
-  transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
-    delete returnedObject._id
-    delete returnedObject.__v
-  },
-})
-
 const Note = mongoose.model('Note', noteSchema)
 
 const app = express()
@@ -97,10 +89,8 @@ app.post('/api/notes', (request, response) => {
   response.json(note)
 })
 
-app.get('/api/notes', (request, response) => {
-  Note.find({}).then((notes) => {
-    response.json(notes)
-  })
+app.get('/api/notes', (req, res) => {
+  res.json(notes)
 })
 
 app.delete('/api/notes/:id', (request, response) => {
