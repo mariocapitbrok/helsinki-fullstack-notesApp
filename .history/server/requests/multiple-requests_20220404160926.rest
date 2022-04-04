@@ -5,6 +5,6 @@ POST http://localhost:3001/api/notes
 Content-Type: application/json
 
 {
-  "content": "HTML is Easy",
+  "content": "GoLang is a perfect language to work with GCP",
   "important": false
 }
