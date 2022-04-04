@@ -81,7 +81,7 @@ app.delete('/api/notes/:id', (request, response) => {
   response.status(204).end()
 })
 
-app.get('/api/notes/:id', (request, response, next) => {
+app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id)
     .then((note) => {
       if (note) {
@@ -90,7 +90,10 @@ app.get('/api/notes/:id', (request, response, next) => {
         response.status(404).end()
       }
     })
-    .catch((error) => next(error))
+    .catch((error) => {
+      console.log(error)
+      response.status(400).send({ error: 'malformatted id' })
+    })
 })
 
 const unknownEndpoint = (request, response) => {
@@ -109,8 +112,7 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
-// this has to be the last loaded middleware.
-app.use(errorHandler)
+app.use(errorHandler) // this has to be the last loaded middleware.
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
