@@ -10,8 +10,7 @@
     "build:ui": "rm -rf build && cd ../client/ && npm run build && cp -r build ../server",
     "deploy": "git push heroku main",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push heroku main && npm run deploy",
-    "logs:prod": "heroku logs --tail",
-    "lint": "eslint ."
+    "logs:prod": "heroku logs --tail"
   },
   "author": "Mario Capitbrok",
   "license": "MIT",
@@ -22,7 +21,6 @@
     "mongoose": "^6.2.9"
   },
   "devDependencies": {
-    "eslint": "^8.13.0",
     "nodemon": "^2.0.15"
   }
 }
